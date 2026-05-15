@@ -24,3 +24,9 @@ Per comodità, è disponibile un pacchetto pre-configurato nella sezione **Relea
 1. Scarica lo ZIP e estrailo.
 2. Esegui `test.exe` per creare un messaggio cifrato.
 3. Esegui `decifrario.exe` per vedere l'algoritmo ricostruire il testo originale in tempo reale.
+
+> [!IMPORTANT]
+> **Note sull'utilizzo e limitazioni tecniche:**
+>
+> 1. **Gestione Ambiguità (Collisioni):** Poiché ogni carattere ha due possibili origini ($\pm 1$), alcune parole cifrate brevi potrebbero corrispondere a più termini italiani. In questi casi, il software restituirà tutte le opzioni possibili separate da uno slash (es: `parola1/parola2`). Spetta all'utente identificare quella corretta in base al contesto della frase.
+> 2. **Punteggiatura e Caratteri Speciali:** Al momento il software è ottimizzato per l'analisi di soli caratteri alfabetici. Si raccomanda di **non inserire punteggiatura** (punti, virgole, punti esclamativi) nel file `testo.txt`, poiché i caratteri non alfabetici potrebbero compromettere il corretto funzionamento dell'algoritmo di decodifica o essere ignorati.
