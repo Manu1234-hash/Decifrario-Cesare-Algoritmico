@@ -130,27 +130,41 @@ string make_next(string word){
 string spell_check(string word){
     string prev = make_prev(word);
     string next = make_next(word);
-    string result = "[Not found]";
+    string result = "";
     int N_len = word.length();
     int numCombinations = 1 << N_len;
+    
+    int found_count = 0; // Contatore per le parole trovate
+
     for (int i = 0; i < numCombinations; i++) {
         string temp = "";
         for (int j = N_len - 1; j >= 0; j--) {
-            if ((i>>j)%2){
-                temp += prev[N_len-1-j];
-            }
-            else{
-                temp += next[N_len-1-j];
+            if ((i >> j) % 2) {
+                temp += prev[N_len - 1 - j];
+            } else {
+                temp += next[N_len - 1 - j];
             }
         }
-        if(check(temp)){
-            result = temp;
-            break;
+
+        if (check(temp)) {
+            // Se non è la prima parola trovata, aggiungi uno slash
+            if (found_count > 0) {
+                if (result.find(temp) == string::npos) {
+                    result += "/" + temp;
+                    found_count++;
+                }
+            } else {
+                result = temp;
+                found_count++;
+            }
         }
+    }
+
+    if (found_count == 0) {
+        return "[Not found]";
     }
     return result;
 }
-
 int main(void)
 {
     string dictionary = "660000_parole_italiane.txt";
